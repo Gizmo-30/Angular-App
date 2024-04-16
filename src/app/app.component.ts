@@ -1,8 +1,6 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
-import {ITask} from "./models/task";
-import {tasks as data} from "./data/tasks";
 import {MatGridList, MatGridTile, MatGridTileText} from "@angular/material/grid-list";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MatIconModule} from "@angular/material/icon";
@@ -21,7 +19,6 @@ import {MediaMatcher} from "@angular/cdk/layout";
 })
 export class AppComponent {
   title = 'task-tracker';
-  tasks: ITask[] = data
 
   mobileQuery: MediaQueryList;
 
@@ -36,4 +33,5 @@ export class AppComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
 }
