@@ -1,0 +1,8 @@
+<mat-sidenav  class="sidenav" #snav opened [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  <mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" class="sidenav_link">Home</a>
+      <a mat-list-item routerLink="/taks" class="sidenav_link">My tasks</a>
+    </mat-nav-list>
+  </mat-nav-list>
+</mat-sidenav>
