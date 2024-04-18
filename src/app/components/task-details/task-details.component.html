@@ -1,33 +1,40 @@
-<link rel="stylesheet" href="../../../styles.sass">
-<form>
-  <mat-form-field appearance="outline" class="title input">
-    <input matInput value="to do something">
-  </mat-form-field>
-  <table>
-    <tbody>
-    <tr>
-      <td>Исполнитель</td>
-      <td>Значение 2</td>
-    </tr>
-    <tr>
-      <td>Срок выполнения</td>
-      <td>Значение 4</td>
-    </tr>
-    <tr>
-      <td>Проекты</td>
-      <td>Значение 6</td>
-    </tr>
-    <tr>
-      <td>Участники</td>
-      <td>Значение 8</td>
-    </tr>
-    </tbody>
-  </table>
-  <div>
-    <h4>Описание</h4>
-    <mat-form-field>
-      <mat-label>Textarea</mat-label>
-      <textarea matInput></textarea>
+<form class="details">
+    <div class="details__nav">
+        <button mat-stroked-button type="button" class="details__state"><mat-icon>done</mat-icon>выполнено</button>
+        <div class="details__settings">
+            <button mat-icon-button type="button" routerLink="/tasks">
+                <mat-icon>keyboard_tab</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-form-field appearance="outline" class="details__title">
+        <input matInput value="to do something">
     </mat-form-field>
-  </div>
+    <table class="details__extra_info">
+        <tbody>
+        <tr>
+            <td>Исполнитель</td>
+            <td>User</td>
+        </tr>
+        <tr>
+            <td>Срок выполнения</td>
+            <td>Нет срока выполнения</td>
+        </tr>
+        <tr>
+            <td>Проекты</td>
+            <td>Добавить в проекты</td>
+        </tr>
+        <tr>
+            <td>Участники</td>
+            <td>Добавить участников</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="details__description_parent">
+        <h4>Описание</h4>
+        <mat-form-field class="details__description">
+            <mat-label>Опсиание задачи</mat-label>
+            <textarea matInput></textarea>
+        </mat-form-field>
+    </div>
 </form>

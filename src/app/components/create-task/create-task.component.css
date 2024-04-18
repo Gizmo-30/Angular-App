@@ -1,3 +1,9 @@
-
+.creation {
+  width: 800px;
+}
+.creation__content {
+  display: flex;
+  flex-direction: column;
+}
 
 /*# sourceMappingURL=create-task.component.css.map */

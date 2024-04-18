@@ -11,22 +11,13 @@
       <mat-nav-list>
         <mat-nav-list>
           <a mat-list-item routerLink="/" class="sidenav_link">Home</a>
-          <a mat-list-item routerLink="/taks" class="sidenav_link">My tasks</a>
-        </mat-nav-list>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav  class="sidenav" #snav2 opened mode="over" position="end">
-      <mat-nav-list>
-        <mat-nav-list>
-          <a mat-list-item routerLink="/" class="sidenav_link">Home</a>
-          <a mat-list-item routerLink="/taks" class="sidenav_link">My tasks</a>
+          <a mat-list-item routerLink="tasks" class="sidenav_link">My tasks</a>
         </mat-nav-list>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content class="content">
       <router-outlet></router-outlet>
-      <button mat-icon-button (click)="snav2.toggle()"><mat-icon>menu</mat-icon></button>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

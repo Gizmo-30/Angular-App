@@ -1,10 +1,35 @@
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">
-  <h3>Develop across all platforms</h3>
-  <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-    apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>
+<div class="creation">
+  <h2 mat-dialog-title class="creation__title">Создать задачу</h2>
+  <mat-dialog-content class="creation__content" >
+    <mat-form-field appearance="outline"
+                    class="creation__field creation__field_name"
+    >
+      <mat-label>Напишите название задачи</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <div class="creation__details">
+      <mat-form-field appearance="outline" class="creation__field creation__field_priority">
+        <mat-label>Select</mat-label>
+        <mat-select>
+          <mat-option value="one">Высокий</mat-option>
+          <mat-option value="two">Second option</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="creation__field creation__field_priority">
+        <mat-label>Участники</mat-label>
+        <mat-select>
+          <mat-option value="one">Высокий</mat-option>
+          <mat-option value="two">Second option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" class="creation__field creation__field_description" >
+      <mat-label>Описание</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  </mat-dialog-actions>
+</div>

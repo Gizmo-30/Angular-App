@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import {MatGridList, MatGridTile, MatGridTileText} from "@angular/material/grid-list";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
@@ -9,11 +9,13 @@ import {MatIconButton} from "@angular/material/button";
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {MediaMatcher} from "@angular/cdk/layout";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, MatGridList, MatGridTileText, MatGridTile, MatSidenav, MatSidenavContainer, MatSidenavContent, MatIconModule, MatSidenavContainer, MatSidenav, MatSidenavContent, MatRadioGroup, MatRadioButton, MatIconButton, MatToolbar, MatToolbarRow, MatNavList, MatListItem, RouterLink],
+  imports: [RouterOutlet, HomeComponent, MatGridList, MatGridTileText, MatGridTile, MatSidenav, MatSidenavContainer, MatSidenavContent, MatIconModule, MatSidenavContainer, MatSidenav, MatSidenavContent, MatRadioGroup, MatRadioButton, MatIconButton, MatToolbar, MatToolbarRow, MatNavList, MatListItem, RouterLink, RouterLinkActive, MatFormField, MatInput, MatLabel],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })

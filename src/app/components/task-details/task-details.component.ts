@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
-import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {
-  MatCell, MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable
-} from "@angular/material/table";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-task-details',
@@ -18,19 +11,11 @@ import {
   imports: [
     MatFormField,
     MatIcon,
-    MatLabel,
-    MatHint,
+    MatIconButton,
     MatInput,
-    MatTable,
-    MatRow,
-    MatHeaderCell,
-    MatColumnDef,
-    MatCell,
-    MatHeaderRow,
-    MatHeaderCellDef,
-    MatCellDef,
-    MatHeaderRowDef,
-    MatRowDef
+    MatLabel,
+    RouterLink,
+    MatButton
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.sass'
