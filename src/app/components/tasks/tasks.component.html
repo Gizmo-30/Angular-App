@@ -2,6 +2,8 @@
   <button mat-flat-button color="primary" class="button_add" (click)="openDialog()">Add Task </button>
   <div class="tasks" *ngIf="tasks.length !== 0">
     <app-task [tasks]="tasks"></app-task>
+    <span>{{ storage | json }}</span>
+    <button (click)="createLocalData()" >click</button>
   </div>
   <div class="tasks" *ngIf="tasks.length === 0">
     there no tasks yet

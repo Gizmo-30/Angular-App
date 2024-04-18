@@ -1,35 +1,48 @@
-<div class="creation">
+<form [formGroup]="form"
+      (ngSubmit)="submit()"
+      class="creation"
+>
   <h2 mat-dialog-title class="creation__title">Создать задачу</h2>
-  <mat-dialog-content class="creation__content" >
+  <mat-dialog-content class="creation__content">
     <mat-form-field appearance="outline"
                     class="creation__field creation__field_name"
     >
       <mat-label>Напишите название задачи</mat-label>
-      <input matInput>
+      <input matInput formControlName="name" appFocus>
     </mat-form-field>
     <div class="creation__details">
-      <mat-form-field appearance="outline" class="creation__field creation__field_priority">
-        <mat-label>Select</mat-label>
-        <mat-select>
-          <mat-option value="one">Высокий</mat-option>
-          <mat-option value="two">Second option</mat-option>
+      <mat-form-field appearance="outline" class="creation__field creation__field_priority" >
+        <mat-label>Приоритет</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="high">Высокий</mat-option>
+          <mat-option value="avarage">средний</mat-option>
         </mat-select>
+      </mat-form-field >
+      <mat-form-field appearance="outline" class="creation__field creation__field_deadline">
+        <mat-label>Добавить срок</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="deadline">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="creation__field creation__field_priority">
-        <mat-label>Участники</mat-label>
-        <mat-select>
-          <mat-option value="one">Высокий</mat-option>
-          <mat-option value="two">Second option</mat-option>
+      <mat-form-field appearance="outline" class="creation__field creation__field_executor">
+        <mat-label>Исполнитель</mat-label>
+        <mat-select formControlName="executor">
+          <mat-option value="user-1">Пользователь 1</mat-option>
+          <mat-option value="user-2">Пользователь 2</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <mat-form-field appearance="outline" class="creation__field creation__field_description" >
       <mat-label>Описание</mat-label>
-      <textarea matInput></textarea>
+      <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    <button mat-button
+            [disabled]="form.invalid"
+            [mat-dialog-close]="true"
+            type="submit"
+    >Создать</button>
+    <button mat-button mat-dialog-close>Отмена</button>
   </mat-dialog-actions>
-</div>
+</form>
