@@ -1,43 +1,44 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {JsonPipe, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
 import {TaskComponent} from "../task/task.component";
 import {ITask} from "../../models/task";
-import {tasks as data} from "../../data/tasks";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateTaskComponent} from "../create-task/create-task.component";
-import {TaskService} from "../../services/task.service";
+import {TasksService} from "../../services/task.service";
+import {Observable, tap} from "rxjs";
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
+  providers: [TasksService],
   imports: [
     MatButton,
     NgIf,
     TaskComponent,
-    JsonPipe
+    JsonPipe,
+    AsyncPipe
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.sass'
 })
-export class TasksComponent {
-  tasks: ITask[] = data
-  constructor(public dialog: MatDialog, private localStorageService: TaskService) {}
+export class TasksComponent implements OnInit{
+  tasks$: Observable<ITask[]>
+  loading = true
+  constructor(public dialog: MatDialog, private taskService: TasksService ) {}
+
+  ngOnInit(): void {
+    this.tasks$ = this.taskService.getTasks().pipe(
+      tap(() => this.loading = false)
+    );
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(CreateTaskComponent);
   }
 
-  storage: any;
-  ngOnInit(): void {
-    this.localStorageService.storage$.subscribe({
-      next: (res: any) => {
-        this.storage = res;
-      },
-    });
+  addTask(newTask: ITask): void {
+    this.taskService.addTask(newTask);
   }
 
-  public createLocalData(): void {
-    this.localStorageService.setItem('tasks', data[0]);
-  }
 }

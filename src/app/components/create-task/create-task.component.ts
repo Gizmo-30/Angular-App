@@ -12,14 +12,14 @@ import {
 } from "@angular/material/datepicker";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {computeStartOfLinePositions} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/source_file";
 import {FocusDirective} from "../../directives/focus.directive";
+import {TasksService} from "../../services/task.service";
 
 
 @Component({
   selector: 'app-create-task',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), TasksService],
   imports: [
     MatDialogActions,
     MatButton,
@@ -42,8 +42,12 @@ import {FocusDirective} from "../../directives/focus.directive";
   styleUrl: './create-task.component.sass'
 })
 export class CreateTaskComponent {
+  constructor(private taskService: TasksService) {
+
+  }
+
   form = new FormGroup({
-    name: new FormControl<string>('', [
+    title: new FormControl<string>('', [
       Validators.required,
       Validators.maxLength(25)
     ]),
@@ -53,11 +57,7 @@ export class CreateTaskComponent {
     description: new FormControl<string>(''),
   })
 
-  get error() {
-    return this.form.errors
-  }
-
   submit() {
-    console.log(this.form.controls.name.value)
+    this.taskService.addTask(this.form.value)
   }
 }

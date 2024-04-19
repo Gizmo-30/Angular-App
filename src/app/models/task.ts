@@ -1,8 +1,8 @@
 export interface ITask {
-  id: number
-  title: string
-  priority?: string
-  deadline?: object
-  executer?: string
-  description?: string
+  id: number;
+  title?: string;
+  priority?: string;
+  deadline?: string;
+  executor?: string;
+  description?: string;
 }

@@ -1,11 +1,10 @@
 <div>
   <button mat-flat-button color="primary" class="button_add" (click)="openDialog()">Add Task </button>
-  <div class="tasks" *ngIf="tasks.length !== 0">
-    <app-task [tasks]="tasks"></app-task>
-    <span>{{ storage | json }}</span>
-    <button (click)="createLocalData()" >click</button>
+  <span *ngIf="loading">loading...</span>
+  <div class="tasks" *ngIf="tasks$ | async">
+    <app-task [tasks]="tasks$"></app-task>
   </div>
-  <div class="tasks" *ngIf="tasks.length === 0">
-    there no tasks yet
-  </div>
+<!--  <div class="tasks" *ngIf="!tasks | async && loading">-->
+<!--    there no tasks yet-->
+<!--  </div>-->
 </div>

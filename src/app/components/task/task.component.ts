@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ITask} from "../../models/task";
 import {
   MatCard,
@@ -16,12 +16,11 @@ import {MatIcon} from "@angular/material/icon";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {tasks} from "../../data/tasks";
-import {NgClass} from "@angular/common";
-import {emit} from "@angular-devkit/build-angular/src/tools/esbuild/angular/compilation/parallel-worker";
+import {AsyncPipe, NgClass, NgIf} from "@angular/common";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-task',
@@ -47,21 +46,32 @@ import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/mater
     MatSidenav,
     MatSidenavContent,
     RouterOutlet,
-    MatSidenavContainer
+    MatSidenavContainer,
+    AsyncPipe,
+    NgIf
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.sass'
 })
-export class TaskComponent {
-  @Input() tasks: ITask[]
+export class TaskComponent implements OnInit{
+  @Input() tasks: Observable<ITask[]>
+  constructor() {}
 
-  displayedColumns: string[] = ['select', 'title', 'deadline', 'projects', 'members'];
-  dataSource = new MatTableDataSource<ITask>(tasks);
+  displayedColumns: string[] = ['select', 'title', 'deadline', 'priority', 'executor'];
   selection = new SelectionModel<ITask>(true, []);
+  dataSource: MatTableDataSource<ITask>;
+
+  ngOnInit(): void {
+    this.tasks.subscribe(tasks => {
+      this.dataSource = new MatTableDataSource<ITask>(tasks);
+    });
+  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
+
 
 }

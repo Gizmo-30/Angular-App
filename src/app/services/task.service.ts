@@ -1,26 +1,37 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
-import {BehaviorSubject, map, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from "rxjs";
 import {ITask} from "../models/task";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TaskService {
-  storage$: BehaviorSubject<any> = new BehaviorSubject<any>(localStorage);
-  constructor() {}
 
-  public setItem(key: string, value: any): void {
-    localStorage.setItem(key, JSON.stringify(value));
-    this.storage$.next(localStorage);
+@Injectable()
+export class TasksService {
+  private tasksSubject: BehaviorSubject<ITask[]> = new BehaviorSubject<ITask[]>([]);
+  constructor () {
+    const tasksJson = localStorage.getItem('tasks');
+    if (tasksJson) {
+      const tasks = JSON.parse(tasksJson);
+      this.tasksSubject.next(tasks);
+    }
   }
 
-  public getItem<T>(key: string): Observable<any> {
-    return this.storage$.pipe(
-      map((storage: any) => {
-        return storage[key] ? JSON.parse(storage[key]) : undefined;
-      })
-    );
+  getTasks(): Observable<ITask[]> {
+    return this.tasksSubject.asObservable();
+  }
+
+  addTask(task: any): void {
+    let maxId = this.getMaxId()
+    let id = maxId === 0 ? 1 : ++maxId
+
+    const currentTasks = this.tasksSubject.getValue();
+    const updatedTasks: ITask[] = [...currentTasks, {...task, id: id}];
+    this.tasksSubject.next(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  }
+
+  getMaxId(): number {
+    const currentTasks = this.tasksSubject.getValue();
+    return currentTasks.reduce((max, task) => {
+      return task.id > max ? task.id : max;
+    }, 0)
   }
 }
