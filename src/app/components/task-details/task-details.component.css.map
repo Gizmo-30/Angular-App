@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["task-details.component.sass"],"names":[],"mappings":"AACA;EACE;EACA;EACA;;AACA;EACE;EACA;EACA;EACA;EACA;EACA;;AACF;EACE;;AACF;EACE;;AACF;EACE;;AACF;EACE;EACA;;AACF;EACE;EACA;EACA;;AACF;EACE","file":"task-details.component.css"}
+{"version":3,"sourceRoot":"","sources":["task-details.component.sass"],"names":[],"mappings":"AACA;EACE;EACA;EACA;;AACA;EACE;EACA;EACA;EACA;EACA;EACA;;AACF;EACE;;AACF;EACE;EACA;EACA;;AACF;EACE;;AACF;EACE;;AACF;EACE;EACA;;AACF;EACE","file":"task-details.component.css"}

@@ -11,7 +11,6 @@ import {Observable, tap} from "rxjs";
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  providers: [TasksService],
   imports: [
     MatButton,
     NgIf,
@@ -22,23 +21,11 @@ import {Observable, tap} from "rxjs";
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.sass'
 })
-export class TasksComponent implements OnInit{
-  tasks$: Observable<ITask[]>
-  loading = true
-  constructor(public dialog: MatDialog, private taskService: TasksService ) {}
-
-  ngOnInit(): void {
-    this.tasks$ = this.taskService.getTasks().pipe(
-      tap(() => this.loading = false)
-    );
-  }
+export class TasksComponent{
+  constructor(public dialog: MatDialog) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(CreateTaskComponent);
-  }
-
-  addTask(newTask: ITask): void {
-    this.taskService.addTask(newTask);
   }
 
 }

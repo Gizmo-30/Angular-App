@@ -8,24 +8,27 @@
         </div>
     </div>
     <mat-form-field appearance="outline" class="details__title">
-        <input matInput value="to do something">
+        <input matInput [value]="task?.title">
     </mat-form-field>
     <table class="details__extra_info">
         <tbody>
         <tr>
-            <td>Исполнитель</td>
-            <td>User</td>
+            <td class="details_title">Исполнитель</td>
+            <td *ngIf="task?.executor">{{task?.executor}}</td>
+            <td *ngIf="!task?.executor">Добавить исполнителей</td>
         </tr>
         <tr>
-            <td>Срок выполнения</td>
-            <td>Нет срока выполнения</td>
+            <td class="details_title">Срок выполнения</td>
+            <td *ngIf="task?.deadline">{{task?.deadline}}</td>
+            <td *ngIf="!task?.deadline">Добавить срок</td>
         </tr>
         <tr>
-            <td>Проекты</td>
-            <td>Добавить в проекты</td>
+            <td class="details_title">Приоритет</td>
+            <td *ngIf="task?.priority">{{task?.priority}}</td>
+            <td *ngIf="!task?.priority">Добавить приоритет</td>
         </tr>
         <tr>
-            <td>Участники</td>
+            <td class="details_title">Участники</td>
             <td>Добавить участников</td>
         </tr>
         </tbody>
@@ -34,7 +37,7 @@
         <h4>Описание</h4>
         <mat-form-field class="details__description">
             <mat-label>Опсиание задачи</mat-label>
-            <textarea matInput></textarea>
+            <textarea matInput [value]="task?.description"></textarea>
         </mat-form-field>
     </div>
 </form>

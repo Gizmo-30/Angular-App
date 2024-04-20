@@ -9,22 +9,21 @@ import {
   MatCardTitle
 } from "@angular/material/card";
 import {MatAnchor, MatButton, MatIconButton} from "@angular/material/button";
-import {MatDialog} from "@angular/material/dialog";
-import {CreateTaskComponent} from "../create-task/create-task.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {MatIcon} from "@angular/material/icon";
 import {SelectionModel} from "@angular/cdk/collections";
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {AsyncPipe, NgClass, NgIf} from "@angular/common";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
-import {Observable} from "rxjs";
+import {TasksService} from "../../services/task.service";
+import {MatTableModule} from "@angular/material/table";
 
 @Component({
   selector: 'app-task',
   standalone: true,
+  providers: [TasksService],
   imports: [
     MatCardHeader,
     MatCardActions,
@@ -54,24 +53,19 @@ import {Observable} from "rxjs";
   styleUrl: './task.component.sass'
 })
 export class TaskComponent implements OnInit{
-  @Input() tasks: Observable<ITask[]>
-  constructor() {}
+  constructor( public taskService: TasksService) {}
 
   displayedColumns: string[] = ['select', 'title', 'deadline', 'priority', 'executor'];
   selection = new SelectionModel<ITask>(true, []);
-  dataSource: MatTableDataSource<ITask>;
 
   ngOnInit(): void {
-    this.tasks.subscribe(tasks => {
-      this.dataSource = new MatTableDataSource<ITask>(tasks);
-    });
+    this.taskService.getTasks().subscribe();
   }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.taskService.data.length;
     return numSelected === numRows;
   }
-
 
 }
